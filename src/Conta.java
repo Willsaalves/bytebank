@@ -1,11 +1,11 @@
-public class Conta {
+public abstract class Conta {
 
-	private double saldo;
+	protected double saldo;
 	private int agencia;
 	private int numero;
 	private Cliente titular;
 	private static int total;
-	
+
 	public static int getTotal() {
 		return Conta.total;
 	}
@@ -14,18 +14,20 @@ public class Conta {
 		Conta.total = total;
 	}
 
+	public Conta() {
+
+	}
+
 	public Conta(int agencia, int numero) {
-		
+
 		Conta.total++;
-		
-		System.out.println("total de conta é "+ Conta.total);
+
+		System.out.println("total de conta é " + Conta.total);
 		this.agencia = agencia;
 		this.numero = numero;
 	}
 
-	public void deposita(double valor) {
-		this.saldo += valor;
-	}
+	public abstract void deposita(double valor);
 
 	public double getSaldo() {
 		return this.saldo;
@@ -43,11 +45,8 @@ public class Conta {
 
 	public boolean transfere(double valor, Conta destino) {
 
-		if (this.saldo >= valor) {
-			this.saldo -= valor;
-
+		if (this.saca(valor)) {
 			destino.deposita(valor);
-
 			return true;
 		}
 

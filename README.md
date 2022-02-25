@@ -1,2 +1,0 @@
-# bytebank
-projeto do banco
